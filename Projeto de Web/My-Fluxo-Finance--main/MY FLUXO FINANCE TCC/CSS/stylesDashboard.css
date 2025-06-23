@@ -399,3 +399,79 @@
         font-size: 1.5rem;
     }
 }
+/* Adicionar após os estilos existentes */
+
+/* Ajustes para o sistema de 12 colunas na dashboard */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.summary-card {
+    grid-column: span 4;
+}
+
+.content-row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 30px;
+}
+
+.chart-container {
+    grid-column: span 8;
+}
+
+.transactions-container {
+    grid-column: span 4;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .summary-card {
+        grid-column: span 6;
+    }
+    
+    .chart-container {
+        grid-column: span 12;
+    }
+    
+    .transactions-container {
+        grid-column: span 12;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 768px) {
+    .summary-card {
+        grid-column: span 12;
+    }
+    
+    .sidebar {
+        width: 70px;
+    }
+    
+    .main-content {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+    
+    .menu a span {
+        display: none;
+    }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+    
+    .app-name, .user-name {
+        display: none;
+    }
+    
+    .welcome-banner h1 {
+        font-size: 1.5rem;
+    }
+}
