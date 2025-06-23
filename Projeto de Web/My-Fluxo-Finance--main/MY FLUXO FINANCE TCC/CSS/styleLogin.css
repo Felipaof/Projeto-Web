@@ -151,3 +151,22 @@ body {
         padding: 30px 20px;
     }
 }
+/* Adicionar após os estilos existentes */
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Smartphone */
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
