@@ -75,3 +75,36 @@ h2 {
     border: 1px solid #333;
     margin-top: 5px;
 }
+/* Adicionar após os estilos existentes */
+
+.categorias {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.coluna {
+    grid-column: span 4;
+}
+
+.formulario {
+    grid-column: span 12;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .coluna {
+        grid-column: span 6;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 768px) {
+    .coluna {
+        grid-column: span 12;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+}
