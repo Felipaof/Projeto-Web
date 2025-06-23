@@ -166,3 +166,43 @@
         gap: 0;
     }
 }
+/* Adicionar após os estilos existentes */
+
+.cadastro-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.input-group {
+    flex: 0 0 calc(50% - 30px);
+    margin: 0 15px 20px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .input-group {
+        flex: 0 0 calc(50% - 30px);
+    }
+}
+
+/* Smartphone */
+@media (max-width: 768px) {
+    .input-group {
+        flex: 0 0 100%;
+    }
+    
+    .cadastro-container {
+        padding: 20px;
+        width: 95%;
+    }
+    
+    .input-row {
+        flex-direction: column;
+    }
+}
