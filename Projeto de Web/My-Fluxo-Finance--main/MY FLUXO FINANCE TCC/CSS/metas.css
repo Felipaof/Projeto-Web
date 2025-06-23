@@ -191,3 +191,37 @@
       width: 85%;
     }
   }
+/* Adicionar após os estilos existentes */
+
+.metas-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.meta-card {
+    grid-column: span 6;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .meta-card {
+        grid-column: span 6;
+    }
+    
+    .meta-info {
+        flex-direction: column;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 768px) {
+    .meta-card {
+        grid-column: span 12;
+    }
+    
+    .modal-content {
+        width: 90%;
+        margin: 10% auto;
+    }
+}
