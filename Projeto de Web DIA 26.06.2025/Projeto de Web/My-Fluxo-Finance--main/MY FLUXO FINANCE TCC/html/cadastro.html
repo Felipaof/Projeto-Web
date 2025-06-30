@@ -6,15 +6,12 @@
     <title>Cadastre-se - My Fluxo Finance</title>
     <link rel="stylesheet" href="../CSS/stylesCadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Firebase SDK v9+ (Modular) -->
+
     <script type="module">
-        // Importe os módulos necessários
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
 
-        // Sua configuração do Firebase (use a mesma do login)
         const firebaseConfig = {
             apiKey: "AIzaSyCU_jlDrdbWZ780KdBmBMregGqoVFhw2Ag",
             authDomain: "my-fluxo-finance.firebaseapp.com",
@@ -24,13 +21,10 @@
             appId: "1:310977282920:web:d003d14bf72f508da0ccdd",
             measurementId: "G-SBWWBYKLQB"
         };
-
-        // Inicialize o Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Função para cadastrar usuário
         window.cadastrarUsuario = async (e) => {
             e.preventDefault();
             
@@ -99,12 +93,12 @@
 <body>
     <div class="cadastro-container">
         <div class="cadastro-header">
-            <img src="../../MFF.jpg" alt="Logo My Fluxo Finance" class="logo" style="height: 60px; margin-bottom: 20px;">
+            <img src="../Images/MFF.jpg" alt="Logo My Fluxo Finance" class="logo" style="height: 60px; margin-bottom: 20px;">
             <h1>Crie sua conta</h1>
             <p>Comece a controlar suas finanças em poucos minutos</p>
         </div>
         
-        <!-- Mensagem de erro (inicialmente oculta) -->
+        <!-- Mensagem de erro -->
         <div id="erro-cadastro" class="mensagem-erro" style="display: none;"></div>
         
         <form class="cadastro-form" onsubmit="cadastrarUsuario(event)">
@@ -162,7 +156,7 @@
     </div>
 
     <script>
-        // Validação simples de senha (mantida do seu código original)
+        // Validação simples de senha 
         const senhaInput = document.getElementById('senha');
         const strengthBar = document.querySelector('.strength-bar');
         const strengthText = document.querySelector('.strength-text');
@@ -192,7 +186,7 @@
             }
         });
 
-        // Máscaras (mantidas do seu código original)
+        // Máscaras 
         document.getElementById('cpf').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 3) value = value.replace(/^(\d{3})(\d)/g, '$1.$2');

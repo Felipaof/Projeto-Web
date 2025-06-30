@@ -1,4 +1,3 @@
-/* Estilos para a página de cadastro */
 .cadastro-container {
     background-color: white;
     border-radius: 10px;
@@ -153,21 +152,6 @@
 .login-link a:hover {
     text-decoration: underline;
 }
-
-/* Responsividade */
-@media (max-width: 850px) {
-    .cadastro-container {
-        width: 90%;
-        padding: 30px 20px;
-    }
-    
-    .input-row {
-        flex-direction: column;
-        gap: 0;
-    }
-}
-/* Adicionar após os estilos existentes */
-
 .cadastro-container {
     max-width: 800px;
     margin: 0 auto;
@@ -183,15 +167,25 @@
     flex: 0 0 calc(50% - 30px);
     margin: 0 15px 20px;
 }
+/* Responsividade */
+@media (max-width: 850px) {
+    .cadastro-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
 
-/* Tablet */
 @media (max-width: 1024px) {
     .input-group {
         flex: 0 0 calc(50% - 30px);
     }
 }
 
-/* Smartphone */
 @media (max-width: 768px) {
     .input-group {
         flex: 0 0 100%;

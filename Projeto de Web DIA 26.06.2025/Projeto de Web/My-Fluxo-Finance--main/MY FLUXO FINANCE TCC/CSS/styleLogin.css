@@ -122,7 +122,7 @@ body {
 .register-link a:hover {
     text-decoration: underline;
 }
-/* Estilo para a mensagem de erro */
+
 .mensagem-erro {
     background-color: #ffebee;
     color: #c62828;
@@ -133,7 +133,6 @@ body {
     display: none;
 }
 
-/* Estilo para o container de login */
 .login-container {
     max-width: 400px;
     margin: 0 auto;
@@ -142,8 +141,10 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
-/* Outros estilos que você já tinha... */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+}
 /* Responsividade */
 @media (max-width: 480px) {
     .login-container {
@@ -151,14 +152,7 @@ body {
         padding: 30px 20px;
     }
 }
-/* Adicionar após os estilos existentes */
 
-.login-container {
-    width: 100%;
-    max-width: 400px;
-}
-
-/* Smartphone */
 @media (max-width: 480px) {
     .login-container {
         width: 90%;
