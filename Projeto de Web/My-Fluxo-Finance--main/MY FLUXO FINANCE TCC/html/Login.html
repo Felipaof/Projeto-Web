@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="../CSS/styleLogin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Firebase SDK v9+ (Modular) -->
     <script type="module">
-        // Importe os módulos necessários
+   
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
-        // Sua configuração do Firebase
+    
         const firebaseConfig = {
             apiKey: "AIzaSyCU_jlDrdbWZ780KdBmBMregGqoVFhw2Ag",
             authDomain: "my-fluxo-finance.firebaseapp.com",
@@ -23,10 +22,10 @@
             measurementId: "G-SBWWBYKLQB"
         };
 
-        // Inicialize o Firebase
+        // Inicializa
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        // Função para fazer login
+        //faz login
         window.fazerLogin = async (email, senha) => {
             try {
                 await signInWithEmailAndPassword(auth, email, senha);
@@ -45,7 +44,6 @@
             }
         };
 
-        // Verifica se usuário já está logado
         onAuthStateChanged(auth, (user) => {
             if (user) window.location.href = "dashboard.html";
         });
@@ -56,7 +54,7 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <img src="../../MFF.jpg" alt="Logo" class="logo" style="height:60px;margin-bottom:20px;">
+            <img src="../Images/MFF.jpg" alt="Logo" class="logo" style="height:60px;margin-bottom:20px;">
             <h1>Bem-vindo</h1>
             <p>Faça login para acessar sua conta</p>
         </div>
@@ -87,7 +85,7 @@
         </form>
     </div>
 
- <script src="login.js"></script>
+ <script src="../JS/login.js"></script>
 
 </body>
 </html>

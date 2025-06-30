@@ -1,6 +1,5 @@
-/* Estilos gerais com variáveis CSS */
 :root {
-    --primary-color: #0d6efd;
+    --primary-color: #43c58f;
     --secondary-color: #4CAF50;
     --danger-color: #f44336;
     --bg-color: #f8f9fa;
@@ -15,10 +14,10 @@
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
+    font-family: var(--font-family) !important;
+     background-color: var(--bg-color) !important;
     color: var(--text-color);
-    font-size: var(--font-size);
+    font-size: var(--font-size) !important;
     line-height: 1.6;
 }
 
@@ -70,7 +69,6 @@ body {
     font-size: 1.1rem;
 }
 
-/* Conteúdo principal */
 .main-content {
     margin-left: 250px;
     padding: 30px;
@@ -94,7 +92,6 @@ body {
     margin-bottom: 0;
 }
 
-/* Cards de configuração - Estilo consistente com metas.css */
 .config-section {
     margin-bottom: 30px;
 }
@@ -128,14 +125,46 @@ body {
     padding: 20px;
 }
 
-/* Seletor de cores - Estilo melhorado */
 .color-picker {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 15px;
 }
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 10px 0;
+}
 
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  border-color: var(--text-color);
+}
+
+.color-option.active {
+  border-color: var(--text-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px var(--text-color);
+}
+
+.form-control-color {
+  width: 80px;
+  height: 40px;
+  padding: 3px;
+}
 .color-option {
     width: 40px;
     height: 40px;
@@ -156,7 +185,6 @@ body {
     box-shadow: 0 0 0 2px var(--card-bg), 0 0 0 4px var(--text-color);
 }
 
-/* Pré-visualização de fonte - Estilo consistente */
 .preview-area {
     background-color: var(--bg-color);
     padding: 20px;
@@ -176,7 +204,6 @@ body {
     color: var(--text-color);
 }
 
-/* Formulários - Estilo melhorado */
 .form-group {
     margin-bottom: 20px;
 }
@@ -198,7 +225,6 @@ body {
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
-/* Botões - Estilo consistente com metas.css */
 .btn {
     padding: 10px 20px;
     border-radius: 6px;
@@ -229,8 +255,27 @@ body {
 .btn-danger:hover {
     background-color: #d32f2f;
 }
+.dashboard-container {
+    display: flex;
+    margin-top: 60px;
+}
 
-/* Responsividade - Adaptado de metas.css */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    height: calc(100vh - 60px);
+    position: fixed;
+    padding: 20px 0;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+}
+
+/* Responsividade */
 @media (max-width: 1024px) {
     .config-card {
         padding: 15px;
@@ -259,7 +304,6 @@ body {
     }
 }
 
-/* Dark mode - Integrado com sistema de cores */
 body.dark-mode {
     --bg-color: #212529;
     --card-bg: #343a40;

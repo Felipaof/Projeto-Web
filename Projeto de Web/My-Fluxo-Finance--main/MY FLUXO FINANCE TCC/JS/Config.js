@@ -1,164 +1,171 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Seletores
-    const colorOptions = document.querySelectorAll('.color-option');
-    const customColor = document.getElementById('customColor');
-    const fontFamily = document.getElementById('fontFamily');
-    const fontSize = document.getElementById('fontSize');
-    const resetButton = document.getElementById('resetSettings');
-    const fontPreview = document.querySelector('.font-preview');
+document.addEventListener('DOMContentLoaded', function () {
+  const bgPicker = document.getElementById('bg-color-picker');
+  const primaryPicker = document.getElementById('primary-color-picker');
+  const customColor = document.getElementById('customColor');
+  const fontFamily = document.getElementById('fontFamily');
+  const fontSize = document.getElementById('fontSize');
+  const preview = document.querySelector('.font-preview');
+  const resetButton = document.getElementById('resetSettings');
+
+  // Cores padrão para os seletores
+  const bgColors = ['#ffffff', '#f8f9fa', '#e9ecef', '#212529', '#f1f8e9', '#e3f2fd'];
+  const primaryColors = ['#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#dc3545', '#fd7e14'];
+
+  // Cria os botões de seleção de cor
+  function createColorOptions(container, colors, type) {
+    container.innerHTML = ''; // Limpa o container primeiro
     
-    // Aplicar tema para todas as páginas
-    function applyThemeToAllPages() {
-        const theme = {
-            bgColor: localStorage.getItem('bgColor') || '#f8f9fa',
-            primaryColor: localStorage.getItem('primaryColor') || '#0d6efd',
-            fontFamily: localStorage.getItem('fontFamily') || "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-            fontSize: localStorage.getItem('fontSize') || '16px'
-        };
+    colors.forEach(color => {
+      const btn = document.createElement('button');
+      btn.className = 'color-option';
+      btn.style.backgroundColor = color;
+      btn.dataset.color = color;
+      btn.title = color;
+      
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         
-        // Salva o tema atual no localStorage para todas as páginas
-        localStorage.setItem('siteTheme', JSON.stringify(theme));
-    }
-    
-    // Aplicar cor de fundo
-    function applyBackgroundColor(color) {
-        document.body.style.backgroundColor = color;
-        localStorage.setItem('bgColor', color);
-        applyThemeToAllPages();
-    }
-    
-    // Aplicar cor primária
-    function applyPrimaryColor(color) {
-        document.documentElement.style.setProperty('--primary-color', color);
-        
-        // Atualizar elementos em todas as páginas
-        const elementsToUpdate = [
-            '.card-header',
-            '.botao-primario',
-            '.welcome-banner',
-            '.add-transaction',
-            '.btn-nova-meta',
-            'header'
-        ];
-        
-        elementsToUpdate.forEach(selector => {
-            document.querySelectorAll(selector).forEach(element => {
-                element.style.backgroundColor = color;
-            });
+        // Remove a classe 'active' de todos os botões do mesmo container
+        container.querySelectorAll('.color-option').forEach(option => {
+          option.classList.remove('active');
         });
         
-        localStorage.setItem('primaryColor', color);
-        applyThemeToAllPages();
-    }
-    
-    // Aplicar fonte
-    function applyFont(font) {
-        document.body.style.fontFamily = font;
-        localStorage.setItem('fontFamily', font);
-        applyThemeToAllPages();
-    }
-    
-    // Aplicar tamanho da fonte
-    function applyFontSize(size) {
-        document.body.style.fontSize = size;
+        // Adiciona 'active' ao botão clicado
+        btn.classList.add('active');
         
-        // Ajustar elementos baseados no tamanho da fonte
-        const adjustElements = [
-            { selector: 'body', property: 'fontSize' },
-            { selector: 'h1', property: 'fontSize', multiplier: 2 },
-            { selector: 'h2', property: 'fontSize', multiplier: 1.5 },
-            { selector: 'h3', property: 'fontSize', multiplier: 1.3 },
-            { selector: '.card-value', property: 'fontSize', multiplier: 1.5 }
-        ];
-        
-        const baseSize = parseInt(size);
-        adjustElements.forEach(item => {
-            const value = item.multiplier ? `${baseSize * item.multiplier}px` : size;
-            document.querySelectorAll(item.selector).forEach(el => {
-                el.style[item.property] = value;
-            });
-        });
-        
-        localStorage.setItem('fontSize', size);
-        applyThemeToAllPages();
-    }
-    
-    // Carregar configurações salvas
-    function loadSettings() {
-        // Verificar se há um tema salvo para todas as páginas
-        const savedTheme = localStorage.getItem('siteTheme');
-        if (savedTheme) {
-            const theme = JSON.parse(savedTheme);
-            applyBackgroundColor(theme.bgColor);
-            applyPrimaryColor(theme.primaryColor);
-            applyFont(theme.fontFamily);
-            applyFontSize(theme.fontSize);
-            return;
+        // Salva no localStorage
+        if (type === 'bg') {
+          localStorage.setItem('bgColor', color);
+        } else {
+          localStorage.setItem('primaryColor', color);
         }
         
-        // Cor de fundo
-        const savedBgColor = localStorage.getItem('bgColor');
-        if (savedBgColor) applyBackgroundColor(savedBgColor);
-        
-        // Cor primária
-        const savedPrimaryColor = localStorage.getItem('primaryColor');
-        if (savedPrimaryColor) applyPrimaryColor(savedPrimaryColor);
-        
-        // Fonte
-        const savedFontFamily = localStorage.getItem('fontFamily');
-        if (savedFontFamily) {
-            fontFamily.value = savedFontFamily;
-            applyFont(savedFontFamily);
-        }
-        
-        // Tamanho da fonte
-        const savedFontSize = localStorage.getItem('fontSize');
-        if (savedFontSize) {
-            fontSize.value = savedFontSize;
-            applyFontSize(savedFontSize);
-        }
+        saveTheme();
+      });
+      
+      container.appendChild(btn);
+    });
+  }
+
+  // Salva o tema atual
+  function saveTheme() {
+    const theme = {
+      bgColor: localStorage.getItem('bgColor') || getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim() || '#white',
+      primaryColor: localStorage.getItem('primaryColor') || getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#0d6efd',
+      fontFamily: fontFamily.value,
+      fontSize: fontSize.value
+    };
+    
+    localStorage.setItem('siteTheme', JSON.stringify(theme));
+    
+    // Atualiza outras abas
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'siteTheme',
+      newValue: JSON.stringify(theme)
+    }));
+    
+    // Aplica na página atual
+    if (typeof applyThemeSettings === 'function') {
+      applyThemeSettings();
     }
+  }
+
+  // Restaura as seleções salvas
+  function restoreSelections() {
+    const savedTheme = localStorage.getItem('siteTheme');
     
-    // Event listeners
-    colorOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const color = this.getAttribute('data-color');
-            if (this.parentElement.previousElementSibling.textContent.includes('Fundo')) {
-                applyBackgroundColor(color);
-            } else {
-                applyPrimaryColor(color);
-            }
-            
-            colorOptions.forEach(opt => opt.classList.remove('active'));
-            this.classList.add('active');
-        });
+    if (savedTheme) {
+      const theme = JSON.parse(savedTheme);
+      
+      // Restaura seleção de fonte
+      if (theme.fontFamily) {
+        fontFamily.value = theme.fontFamily;
+        preview.style.fontFamily = theme.fontFamily;
+      }
+      
+      // Restaura tamanho da fonte
+      if (theme.fontSize) {
+        fontSize.value = theme.fontSize;
+        preview.style.fontSize = theme.fontSize;
+      }
+      
+      // Marca as cores selecionadas
+      if (theme.bgColor) {
+        markSelectedColor(bgPicker, theme.bgColor);
+      }
+      
+      if (theme.primaryColor) {
+        markSelectedColor(primaryPicker, theme.primaryColor);
+        customColor.value = theme.primaryColor;
+      }
+    }
+  }
+
+  // Marca a cor selecionada nos pickers
+  function markSelectedColor(container, color) {
+    container.querySelectorAll('.color-option').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.dataset.color.toLowerCase() === color.toLowerCase()) {
+        btn.classList.add('active');
+      }
     });
+  }
+
+  // Event listeners
+  fontFamily.addEventListener('change', () => {
+    preview.style.fontFamily = fontFamily.value;
+    saveTheme();
+  });
+
+  fontSize.addEventListener('change', () => {
+    preview.style.fontSize = fontSize.value;
+    saveTheme();
+  });
+
+  customColor.addEventListener('input', () => {
+    localStorage.setItem('primaryColor', customColor.value);
+    markSelectedColor(primaryPicker, customColor.value);
+    saveTheme();
+  });
+
+ resetButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (confirm('Deseja resetar todas as configurações para os valores padrão?')) {
+    // Limpa todo o localStorage relacionado ao tema
+    localStorage.removeItem('siteTheme');
+    localStorage.removeItem('bgColor');
+    localStorage.removeItem('primaryColor');
+    localStorage.removeItem('fontFamily');
+    localStorage.removeItem('fontSize');
     
-    customColor.addEventListener('input', function() {
-        applyPrimaryColor(this.value);
-    });
+    // Reseta os selects para valores padrão
+    fontFamily.value = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+    fontSize.value = "16px";
+    preview.style.fontFamily = fontFamily.value;
+    preview.style.fontSize = fontSize.value;
     
-    fontFamily.addEventListener('change', function() {
-        applyFont(this.value);
-        fontPreview.style.fontFamily = this.value;
-    });
+    // Remove seleção de cores
+    bgPicker.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
+    primaryPicker.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
     
-    fontSize.addEventListener('change', function() {
-        applyFontSize(this.value);
-        fontPreview.style.fontSize = this.value;
-    });
+    // Reseta cor personalizada para branco (#ffffff)
+    customColor.value = '#ffffff';
     
-    resetButton.addEventListener('click', function() {
-        if (confirm('Tem certeza que deseja resetar todas as configurações?')) {
-            localStorage.clear();
-            location.reload();
-        }
-    });
+    // Define as cores padrão explicitamente
+    document.documentElement.style.setProperty('--primary-color', '#0d6efd');
+    document.documentElement.style.setProperty('--bg-color', '#ffffff'); // Cor de fundo branca
     
-    // Carregar configurações ao iniciar
-    loadSettings();
+    // Marca a cor branca como ativa no seletor de fundo
+    markSelectedColor(bgPicker, '#ffffff');
     
-    // Atualizar pré-visualização
-    fontPreview.style.fontFamily = fontFamily.value;
-    fontPreview.style.fontSize = fontSize.value;
+    // Força a aplicação do tema padrão
+    saveTheme();
+    location.reload();
+  }
+});
+
+  // Inicialização
+  createColorOptions(bgPicker, bgColors, 'bg');
+  createColorOptions(primaryPicker, primaryColors, 'primary');
+  restoreSelections();
 });

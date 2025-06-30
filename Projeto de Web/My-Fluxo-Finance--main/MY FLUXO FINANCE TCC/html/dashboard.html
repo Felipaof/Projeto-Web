@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Barra de navegação superior -->
+    <!-- nav -->
     <nav class="navbar">
         <div class="navbar-left">
             <img src="../Images/MFF.jpg" alt="Logo My Fluxo Finance" class="logo">
@@ -29,9 +29,9 @@
         </div>
     </nav>
 
-    <!-- Layout principal -->
+
     <div class="dashboard-container">
-        <!-- Sidebar -->
+
         <aside class="sidebar">
             <ul class="menu">
                 <li class="active">
@@ -46,7 +46,7 @@
             </ul>
         </aside>
 
-        <!-- Conteúdo principal -->
+  
         <main class="main-content">
             <div class="welcome-banner">
                 <h1 id="welcome-message">Bem-vindo de volta!</h1>
@@ -152,19 +152,36 @@
                         </li>
                     </ul>
                     <button class="add-transaction">
-                        <i class="fas fa-plus"></i> Adicionar transação
+                        <a href="../html/addtransacao.html"><i class="fas fa-plus"></i> Adicionar transação</a>
                     </button>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Firebase SDK -->
+ 
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     
-    <!-- Script da aplicação -->
+
     <script src="../JS/dashboard.js"></script>
+    <script src="../JS/Config.js"></script>
+    <script src="../JS/temas.js"></script>
+    <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof applyThemeSettings === 'function') {
+      applyThemeSettings();
+    }
+  });
+  
+
+  window.addEventListener('themeUpdated', function() {
+    if (typeof applyThemeSettings === 'function') {
+      applyThemeSettings();
+    }
+  });
+</script>
 </body>
 </html>

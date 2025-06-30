@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <!-- Barra de navegação -->
+
   <nav class="navbar">
     <div class="navbar-left">
       <img src="../Images/MFF.jpg" alt="Logo" class="logo">
@@ -30,16 +30,14 @@
   </nav>
 
   <div class="dashboard-container">
-    <!-- Menu Lateral -->
     <aside class="sidebar">
       <ul class="menu">
         <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
         <li class="active"><a href="#"><i class="fas fa-bullseye"></i> Metas</a></li>  
-        <li><a href="config.html"><i class="fas fa-home"></i> Configurações</a></li>
+        <li><a href="config.html"><i class="fas fa-cog"></i> Configurações</a></li>
       </ul>
     </aside>
 
-    <!-- Conteúdo Principal -->
     <main class="main-content">
       <div class="welcome-banner">
         <h1>Minhas Metas</h1>
@@ -51,19 +49,18 @@
           <i class="fas fa-plus"></i> Nova Meta
         </button>
 
-        <div id="listaMetas" class="metas-container">
-          <!-- Metas serão carregadas aqui via JavaScript -->
-        </div>
+        <div id="listaMetas" class="metas-container"></div>
       </div>
     </main>
   </div>
 
-  <!-- Modal para nova meta -->
+
   <div id="modalMeta" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Adicionar Nova Meta</h2>
       <form id="formMeta">
+        <input type="hidden" id="metaId">
         <div class="input-group">
           <label for="metaNome">Nome da Meta</label>
           <input type="text" id="metaNome" required>
@@ -87,9 +84,9 @@
     </div>
   </div>
 
-  <!-- Firebase e scripts -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
   <script src="../JS/metas.js"></script>
+  <script src="../JS/Config.js"></script>
+  <script src="../JS/temas.js"></script>
 </body>
 </html>
