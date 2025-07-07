@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metas | MyFluxo Finance</title>
+  <!-- link css -->
+  <link rel="stylesheet" href="../CSS/stylesDashboard.css">
+  <link rel="stylesheet" href="../CSS/metas.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<!-- navegação padrão -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="../Images/MFF.jpg" alt="Logo" class="logo">
+      <span class="app-name">MyFluxo Finance</span>
+    </div>
+    <div class="navbar-right">
+      <div class="user-menu">
+        <img src="https://ui-avatars.com/api/?name=Usuario" alt="Usuário" class="user-avatar">
+        <span class="user-name">Usuário</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="dropdown-menu">
+          <a href="#"><i class="fas fa-user"></i> Perfil</a>
+          <a href="#"><i class="fas fa-cog"></i> Configurações</a>
+          <a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <ul class="menu">
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li class="active"><a href="#"><i class="fas fa-bullseye"></i> Metas</a></li>  
+        <li><a href="config.html"><i class="fas fa-cog"></i> Configurações</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <!-- o banner -->
+      <div class="welcome-banner">
+        <h1>Minhas Metas</h1>
+        <p>Acompanhe e gerencie seus objetivos financeiros</p>
+      </div>
+
+      <div class="metas-content">
+        <button id="btnNovaMeta" class="btn-nova-meta">
+          <i class="fas fa-plus"></i> Nova Meta
+        </button>
+<!-- onde as metas vão aparecer -->
+        <div id="listaMetas" class="metas-container"></div>
+      </div>
+    </main>
+  </div>
+
+<!-- campos de valores do formulario
+  -->
+  <div id="modalMeta" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Adicionar Nova Meta</h2>
+      <form id="formMeta">
+        <input type="hidden" id="metaId">
+        <div class="input-group">
+          <label for="metaNome">Nome da Meta</label>
+          <input type="text" id="metaNome" required>
+        </div>
+        <div class="input-group">
+          <label for="metaValor">Valor Objetivo (R$)</label>
+          <input type="number" id="metaValor" min="0.01" step="0.01" required>
+        </div>
+        <div class="input-group">
+          <label for="metaAtual">Valor Atual (R$)</label>
+          <input type="number" id="metaAtual" min="0" step="0.01" required>
+        </div>
+        <div class="input-group">
+          <label for="metaPrazo">Prazo</label>
+          <input type="date" id="metaPrazo" required>
+        </div>
+        <button type="submit" class="botao-primario">
+          <i class="fas fa-save"></i> Salvar Meta
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!-- link js -->
+  <script src="../JS/metas.js"></script>
+  <script src="../JS/Config.js"></script>
+  <script src="../JS/temas.js"></script>
+</body>
+</html>
